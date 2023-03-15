@@ -13,40 +13,13 @@ void MSSM_limits_mh125(){
 -----------------------------------------------------------------------------*/
   // switch off stats box
   gStyle->SetOptStat(0);
-  // define canvas
-  TCanvas* canv = new TCanvas("MSSM", "MSSM Limits: Mh125", 600, 640);
-  canv->SetGridx(0); canv->SetLogx(1);
-  canv->SetGridy(0); canv->SetLogy(1);
-  canv->SetLeftMargin(0.12);
-  canv->SetRightMargin(0.05);
-  canv->SetTopMargin(0.06);
-  canv->SetBottomMargin(0.10);  
-  TH1F* hr=canv->DrawFrame(90., 1., 2100., 60.);
-  // define x-axis
-  hr->SetXTitle("m_{A} [GeV]");
-  hr->GetXaxis()->SetLabelFont(42);
-  hr->GetXaxis()->SetLabelSize(0.034);
-  hr->GetXaxis()->SetLabelOffset(0.015);
-  hr->GetXaxis()->SetTitleSize(0.04);
-  hr->GetXaxis()->SetTitleFont(42);
-  hr->GetXaxis()->SetTitleColor(1);
-  hr->GetXaxis()->SetTitleOffset(1.20);
-  hr->GetXaxis()->SetNdivisions(50005);
-  hr->GetXaxis()->SetMoreLogLabels();
-  hr->GetXaxis()->SetNoExponent();
-  // define y-axis
-  hr->SetYTitle("tan#beta");
-  hr->GetYaxis()->SetLabelFont(42);
-  hr->GetYaxis()->SetTitleSize(0.04);
-  hr->GetYaxis()->SetTitleOffset(1.30);
-  hr->GetYaxis()->SetLabelSize(0.034);    
-  hr->GetYaxis()->SetNdivisions(50005);
-  hr->GetYaxis()->SetMoreLogLabels();
-  // define legend
-  TLegend* leg0_ = new TLegend(0.535, 0.130, 0.920, 0.435);
+  // define canvas  
+  TCanvas* canv = squared_legend_to_right(90.);
+    // define legend
+  TLegend* leg0_ = new TLegend(0.67, 0.10, 0.97, 0.94);
   leg0_->SetBorderSize(1);
   leg0_->SetFillStyle (1001);
-  leg0_->SetTextSize(0.022464);
+  leg0_->SetTextSize(0.026);
   leg0_->SetFillColor (kWhite);
   TGraph* obs = new TGraph(); obs->SetFillColor(kGray);
   TGraph* exp = new TGraph(); 
@@ -77,33 +50,21 @@ void MSSM_limits_mh125(){
   TGraph* g2 = Contour(HIG_16_018_exp, HIG_16_018_obs, kCyan+2, kCyan, tCyan->GetNumber()); 
   leg0_->AddEntry(g2, "#splitline{A/H #rightarrow bb}{JHEP 08 (2018) 113}", "F");
   TGraph* g3 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber()); 
-  leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717}", "F");
+  leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717^{#scale[1.2]{#club}}}", "F");
   TGraph* g4 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber()); 
-  leg0_->AddEntry(g4, "H#rightarrow WW(l#nu l#nu) (HIG-20-016)", "F");
+  leg0_->AddEntry(g4, "H#rightarrow WW(2l2#nu) (HIG-20-016)", "F");
 
+  TGraph* dummy = new TGraph();  
+  dummy->SetFillColor(kWhite);
+  dummy->SetLineColor(kWhite);
+  leg0_->AddEntry(dummy, "", "F");  
+  leg0_->AddEntry(dummy, "", "F");  
+  
 /*-----------------------------------------------------------------------------
 
  Labelling
 
 -----------------------------------------------------------------------------*/
-  TLatex* tex;
-  tex = new TLatex();
-  tex->SetNDC();
-  tex->SetTextAlign(11);
-
-  tex->SetTextFont(63);
-  tex->SetTextSize(25);
-  tex->SetTextAngle( 0);
-  tex->SetTextColor(kBlack);
-  tex->DrawLatex(0.12, 0.95, "CMS");
-  tex->SetTextFont(53);
-  tex->SetTextSize(25);
-  tex->DrawLatex(0.22, 0.95, "Preliminary");
-  tex->SetTextFont(42);
-  tex->SetLineWidth(2);
-  tex->SetTextSize(0.035);
-  tex->DrawLatex(0.59,0.95,"35.9 - 138 fb^{-1} (13 TeV)");
-  
   /*
   tex->SetTextFont(43);
   tex->SetTextSize(14);
@@ -111,7 +72,7 @@ void MSSM_limits_mh125(){
   tex->DrawLatex(0.93, 0.74, "March 2018");
   */
 
-  TLegend* leg1_ = new TLegend(0.15, 0.130, 0.44, 0.18);
+  TLegend* leg1_ = new TLegend(0.14, 0.13, 0.34, 0.18);
   leg1_->SetBorderSize(1);
   leg1_->SetFillStyle (1001);
   leg1_->SetTextSize(0.022464);

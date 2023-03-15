@@ -10,7 +10,7 @@
 #include "TGraph.h"
 #include "TH2F.h"
 
-// define transparent colors
+// Define transparent colors
 TColor* tRed     = new TColor(3001,  1.,  0.,  0., "tRed"     , 0.15);
 TColor* tGreen   = new TColor(3002,  0.,  1.,  0., "tGreen"   , 0.15);
 TColor* tBlue    = new TColor(3003,  0.,  0.,  1., "tBlue"    , 0.15);
@@ -23,6 +23,7 @@ TColor* kCombDark= new TColor(3009, .48, .88,  1., "kCombDark");
 TColor* kComb    = new TColor(3010, .28, .58, .70, "kComb");
 TColor* tComb    = new TColor(3011, .28, .58, .70, "tComb"    , 0.25);
  
+// Common plotting style for expected and observed limit contours 
 TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tcolor){
   TGraph* g0 = exp();
   g0->SetLineColor(dcolor);
@@ -46,5 +47,57 @@ TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tc
   g1->Draw("Fsame");
   g2->Draw("Lsame");
   return g1;
+}
+
+// Canvas for a squared central figure with legend to the right including "CMS and lumi" tag
+TCanvas* squared_legend_to_right(float lower_x=130., float upper_x=2100, float lower_y=1., float upper_y=60., int log_x=1, int log_y=1){
+  TCanvas* canv = new TCanvas("MSSM", "MSSM Limits", 900, 640);
+  canv->SetGridx(0); canv->SetLogx(log_x);
+  canv->SetGridy(0); canv->SetLogy(log_y);
+  canv->SetLeftMargin(0.12);
+  canv->SetRightMargin(0.35);
+  canv->SetTopMargin(0.06);
+  canv->SetBottomMargin(0.10);  
+  TH1F* hr=canv->DrawFrame(lower_x, lower_y, upper_x, upper_y);
+  // define x-axis
+  hr->SetXTitle("m_{A} [GeV]");
+  hr->GetXaxis()->SetLabelFont(42);
+  hr->GetXaxis()->SetLabelSize(0.034);
+  hr->GetXaxis()->SetLabelOffset(0.015);
+  hr->GetXaxis()->SetTitleSize(0.04);
+  hr->GetXaxis()->SetTitleFont(42);
+  hr->GetXaxis()->SetTitleColor(1);
+  hr->GetXaxis()->SetTitleOffset(1.20);
+  hr->GetXaxis()->SetNdivisions(50005);
+  hr->GetXaxis()->SetMoreLogLabels();
+  hr->GetXaxis()->SetNoExponent();
+  // define y-axis
+  hr->SetYTitle("tan#beta");
+  hr->GetYaxis()->SetLabelFont(42);
+  hr->GetYaxis()->SetTitleSize(0.04);
+  hr->GetYaxis()->SetTitleOffset(0.9);
+  hr->GetYaxis()->SetLabelSize(0.034);    
+  hr->GetYaxis()->SetNdivisions(50005);
+  hr->GetYaxis()->SetMoreLogLabels();
+
+  TLatex* tex;
+  tex = new TLatex();
+  tex->SetNDC();
+  tex->SetTextAlign(11);
+
+  tex->SetTextFont(63);
+  tex->SetTextSize(25);
+  tex->SetTextAngle( 0);
+  tex->SetTextColor(kBlack);
+  tex->DrawLatex(0.12, 0.95, "CMS");
+  tex->SetTextFont(53);
+  tex->SetTextSize(25);
+  tex->DrawLatex(0.19, 0.95, "Preliminary");
+  tex->SetTextFont(42);
+  tex->SetLineWidth(2);
+  tex->SetTextSize(0.035);
+  tex->DrawLatex(0.42,0.95,"35.9-138^{#club} fb^{-1} (13 TeV)");
+
+  return canv;
 }
 
