@@ -1,8 +1,8 @@
-/* This can be used as a template for setting up inputs for MSSM_limits_nh125.C */
+/* This can be used as a template for setting up inputs for MSSM_limits_*.C */
 
 #include "TGraph.h"
 
-TGraph* HIG_XX_XXX_obs(bool filled){
+TGraph* HIG_XX_YYY_obs(bool filled){
   TGraph* graph = new TGraph();
   graph->SetPoint( 0,,);
   graph->SetPoint( 1,,);
@@ -31,7 +31,7 @@ TGraph* HIG_XX_XXX_obs(bool filled){
   return graph;
 }
 
-TGraph* HIG_XX_XX_exp(){
+TGraph* HIG_XX_YYY_exp(){
   TGraph* graph = new TGraph();
   graph->SetPoint( 0,,);
   graph->SetPoint( 1,,);
