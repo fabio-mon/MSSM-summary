@@ -4,20 +4,24 @@
 #include "TMath.h"
 #include "TGraph.h"
 
-
 mssm_xs_tools::mssm_xs_tools(const char* filename, bool kINT, unsigned verbosity) : verbosity_(verbosity), kINTERPOL_(kINT), cashed_(false), nbinsX_(0), minX_(0), maxX_(0), nbinsY_(0), minY_(0), maxY_(0){
   if(verbosity>99){
-    std::cout << "Welcome to the MSSM neutral cross section tool (v1.0). In case of questions contact:"
-              << std::endl
-              << " Allison Mc Carn /  ATLAS (allison.renae.mc.carn@cern.ch)," << std::endl
-              << " Trevor Vickey   /  ATLAS (trevor.vickey@cern.ch),        " << std::endl
-              << " Felix Frensch   /  CMS   (felix.frensch@cern.ch)         " << std::endl
-              << " Roger Wolf      /  CMS   (roger.wolf@cern.ch),           " << std::endl
-              << " Stefan Liebler  / Theory (stefan.liebler@desy.de),       " << std::endl
-              << " Michael Spira   / Theory (michael.spira@psi.ch),         " << std::endl
-              << " Pietro Slavich  / Theory (slavich@lpthe.jussieu.fr).     " << std::endl;
-              
-    }
+    std::cout << "Welcome to the MSSM ROOT file access tool (v2.0)." << std::endl
+              << " In case of questions contact the LHCHXSWG MSSM subgroup conveners." << std::endl
+              << " The subsequent people contributed to the coding and testing of the ROOT files since 2010:" << std::endl
+              << " Monica Vazquez Acosta," << std::endl
+              << " Emanuele Bagnaschi," << std::endl
+              << " Felix Frensch," << std::endl
+              << " Andrew Gilbert," << std::endl
+              << " Artur Gottmann," << std::endl
+              << " Guillermo Hamity, " << std::endl
+              << " Sven Heinemeyer, " << std::endl
+              << " Panu Keskinen," << std::endl
+              << " Stefan Liebler," << std::endl
+              << " Allison McCarn," << std::endl
+              << " Trevor Vickey," << std::endl
+              << " Roger Wolf." << std::endl;
+  }
   if(!filename){
     std::cout << "Chose input file using the method mssm_xs_tools::setup()" << std::endl;
   }
@@ -29,8 +33,8 @@ mssm_xs_tools::mssm_xs_tools(const char* filename, bool kINT, unsigned verbosity
 void 
 mssm_xs_tools::setup(const char* filename){
   /* ______________________________________________________________________________________________
-   * If not available, yet, open input file from full path specified in [filename]. If input_ does
-   * already point to a file nothing is done. This guarantees that only one file can be opened for
+   * If not available, yet open input file from full path specified in [filename]. If input_ does
+   * already point to a file nothing is done. This quarantees that only one file can be opened for
    * one instance of the class.  
    */
   if(!input_){
@@ -59,11 +63,19 @@ mssm_xs_tools::br_rule(const char* decay){
 std::string
 mssm_xs_tools::width_rule(const char* boson){
   /* ______________________________________________________________________________________________
-   * Function argument [boson] expected to be of special form (e.g. "H"). Function argument 
+   * Function agrument [boson] expected to be of special form (e.g. "H"). Function argument 
    * corresponds to building block [BOSON] of histogram name. Prefix histogram name with 
    * "width", append [BOSON], separated by "_" (histgoram name in example above: "width_H");
    */
   return std::string("width")+"_"+std::string(boson);
+} 
+
+std::string
+mssm_xs_tools::coupling_rule(const char* boson){
+  /* ______________________________________________________________________________________________
+   * Function agrument [boson] expected to be of special form (e.g. "gt_H");
+   */
+  return std::string("rescale")+"_"+std::string(boson);
 } 
 
 std::string 
@@ -102,12 +114,10 @@ mssm_xs_tools::hist(std::string histname){
   /* ______________________________________________________________________________________________
    * Check if a histogram with name [histname] is already on stack. If so return historam. If not 
    * try to get a histogram with name [histname] from the input file, cast to TH2F*; add histogram 
-   * to stack with key [histname]. If getting the histogram from the input file was not successful 
-   * issue a WARNING and return a NULL pointer. For verbosity_>2 issue a MESSAGE that a histogram 
-   * with name [histname] has been read from the input file upon successful completion. Save 
-   * histogram to stack for future use. If not yet done so cash some meta information on the 
-   * structure of the histograms (number of bins on x- and y-axis and minimal and maximal values 
-   * on x- and y-axis). Return pointer to histogram.
+   * on stack with key [histogramname]. If getting the histogram from the input file was not 
+   * successful issue a WARNING and return a NULL pointer. For verbosity_>2 issue  MESSAGE that a 
+   * histogram with name [histname] has been read from the input file upon successful completion. 
+   * Save histogram on stack for future use. Return pointer to histogram.
    */  
   if(hists_.find(histname) == hists_.end()){
     // hist not on stack; read from file; if it fails return NULL.
@@ -145,7 +155,7 @@ mssm_xs_tools::hist(std::string histname){
                   << "from input file " 
                   << "[" << input_->GetName() << "]" 
                   << std::endl;
-      }
+      }    
     } 
   }
   return hists_.find(histname)->second;
@@ -156,20 +166,20 @@ mssm_xs_tools::mass2mA(const char* boson, double m, double tanb){
   /* ______________________________________________________________________________________________
    * Get mA for a given value of mass for a fixed value of tanb. The parameter mass can stand for h
    * H or Hp, the meaning is determined from the parameter boson. To get to the desired result the 
-   * nominal minimum and maximum of mA in the model file os determined automatically. The associa-
-   * tion of mass to mA by not be unique (like e.g. in the hMSSM). In this case the highest value 
-   * of mA that returns mass is chosen. To achieve this in a next step a TGraph is filled to deter-
+   * nominal minimum and maximum of mA in the model file is determined automatically. The associa-
+   * tion of mass to mA might not be unique (e.g. in the hMSSM). In this case the highest value of
+   * mA that returns mass is chosen. To achieve this in a next step a TGraph is filled to deter-
    * mine the lowest accessible value of mass as a function of mA. This value of mA is chosen as 
    * the starting value for a second graph in which mA as a function of mass (the unique inverse) 
-   * is filled. From this second graph the the value of mA for given mass is obtained using TGraph
+   * is filled. From this second graph the value of mA for given mass is obtained using TGraph
    * Eval with linear interpolation for values of mass, which are not available as exact values. In
    * cases where values outside the valid ranges of the model are requested Warnings are issued and 
    * the value -1. is returned. This may happen when the requested value of tanb is not compatible 
-   * with the model or when a mA value is requested for a value of mass that cannot be reached 
+   * with the model or when an mA value is requested for a value of mass that cannot be reached 
    * within the model.
    */    
-  // this may be necessary is mass2mA is called for the very first time after instantiation; the 
-  // mass histogram is then already safed on the stack in the course of the cashing of meta 
+  // this may be necessary if mass2mA is called for the very first time after instantiation; the 
+  // mass histogram is then already saved on the stack in the course of the cashing of meta 
   // information, so this is not a complete waist of runtime 
   if(!cashed_){ hist(this->mass_rule(boson)); }
   double value = -1.; 
@@ -224,4 +234,5 @@ mssm_xs_tools::mass2mA(const char* boson, double m, double tanb){
   delete g;
   return value;
 }  
+
 
