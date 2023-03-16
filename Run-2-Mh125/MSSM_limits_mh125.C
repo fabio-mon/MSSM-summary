@@ -1,8 +1,9 @@
 #include "../Common.h"
-#include "HIG-21-001.h"
 #include "HIG-16-018.h"
 #include "HIG-18-010.h"
 #include "HIG-20-016.h"
+#include "HIG-21-011.h"
+#include "HIG-21-001.h"
 #include "Eligibility.h"
 
 void MSSM_limits_mh125(){
@@ -50,28 +51,23 @@ void MSSM_limits_mh125(){
   TGraph* g2 = Contour(HIG_16_018_exp, HIG_16_018_obs, kCyan+2, kCyan, tCyan->GetNumber()); 
   leg0_->AddEntry(g2, "#splitline{A/H #rightarrow bb}{JHEP 08 (2018) 113}", "F");
   TGraph* g3 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber()); 
-  leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717^{#scale[1.2]{#club}}}", "F");
+  leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717^{#scale[1.6]{ #club}}}", "F");
   TGraph* g4 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber()); 
-  leg0_->AddEntry(g4, "H#rightarrow WW(2l2#nu) (HIG-20-016)", "F");
-
+  leg0_->AddEntry(g4, "#splitline{H#rightarrow WW(2l2#nu)}{(HIG-20-016)^{#scale[1.6]{ #club}}}", "F");
+  TGraph* g5 = Contour(HIG_21_011_exp, HIG_21_011_obs, kRed+2, kRed, tRed->GetNumber()); 
+  leg0_->AddEntry(g5 , "#splitline{H #rightarrow hh (bb#gamma#gamma)}{HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  
   TGraph* dummy = new TGraph();  
   dummy->SetFillColor(kWhite);
   dummy->SetLineColor(kWhite);
   leg0_->AddEntry(dummy, "", "F");  
-  leg0_->AddEntry(dummy, "", "F");  
+  //leg0_->AddEntry(dummy, "", "F");  
   
 /*-----------------------------------------------------------------------------
 
  Labelling
 
 -----------------------------------------------------------------------------*/
-  /*
-  tex->SetTextFont(43);
-  tex->SetTextSize(14);
-  tex->SetTextAngle(270);
-  tex->DrawLatex(0.93, 0.74, "March 2018");
-  */
-
   TLegend* leg1_ = new TLegend(0.14, 0.13, 0.34, 0.18);
   leg1_->SetBorderSize(1);
   leg1_->SetFillStyle (1001);
@@ -90,7 +86,15 @@ void MSSM_limits_mh125(){
   extra->Draw("same");  
 
   leg0_->Draw("same");
+  TLatex* tex;
+  tex = new TLatex();
+  tex->SetNDC();
+  tex->SetTextAlign(11);
+  tex->SetTextFont(43);
+  tex->SetTextSize(20);
+  tex->DrawLatex(0.88, 0.057, "^{#scale[1.4]{#club}} 138 fb^{-1}");
   leg1_->Draw("same");
+
   canv->Update();
   canv->Print("MSSM_limits_mh125.pdf");
   return;
