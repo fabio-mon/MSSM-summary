@@ -9,7 +9,7 @@ class mssm_xs_tools(object):
       
     This is a python wrapper class to make the core functionality of
     mssm_xs_tools available also in python. It needs the shared library
-    mssm_xs_tools_C.so, which is obtained by compiling opening ROOT
+    object mssm_xs_tools_C.so, which can e.g. be obtained by opening ROOT
     and typing ".L mssm_xs_tools.C++".
     
     """

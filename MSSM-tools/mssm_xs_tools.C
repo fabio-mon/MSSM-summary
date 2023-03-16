@@ -4,26 +4,33 @@
 #include "TMath.h"
 #include "TGraph.h"
 
+const char* mssm_xs_tools::VERSION="v2.5";
+
 mssm_xs_tools::mssm_xs_tools(const char* filename, bool kINT, unsigned verbosity) : verbosity_(verbosity), kINTERPOL_(kINT), cashed_(false), nbinsX_(0), minX_(0), maxX_(0), nbinsY_(0), minY_(0), maxY_(0){
   if(verbosity>99){
-    std::cout << "Welcome to the MSSM ROOT file access tool (v2.0)." << std::endl
-              << " In case of questions contact the LHCHXSWG MSSM subgroup conveners." << std::endl
-              << " The subsequent people contributed to the coding and testing of the ROOT files since 2010:" << std::endl
-              << " Monica Vazquez Acosta," << std::endl
-              << " Emanuele Bagnaschi," << std::endl
-              << " Felix Frensch," << std::endl
-              << " Andrew Gilbert," << std::endl
-              << " Artur Gottmann," << std::endl
-              << " Guillermo Hamity, " << std::endl
-              << " Sven Heinemeyer, " << std::endl
-              << " Panu Keskinen," << std::endl
-              << " Stefan Liebler," << std::endl
-              << " Allison McCarn," << std::endl
-              << " Trevor Vickey," << std::endl
-              << " Roger Wolf." << std::endl;
+    std::cout << "_____________________________________________________________" << std::endl
+              << "Welcome to the MSSM ROOT file access tool ("<< this->VERSION << ")." << std::endl
+              << std::endl
+              << " In case of questions contact the LHCHXSWG MSSM subgroup"    << std::endl
+              << " conveners. The following people contributed to the coding" << std::endl
+              << " and testing of the ROOT files and this tool since 2010:" << std::endl
+              << std::endl
+              << "  * Monica Vazquez Acosta," << std::endl
+              << "  * Emanuele Bagnaschi," << std::endl
+              << "  * Felix Frensch," << std::endl
+              << "  * Andrew Gilbert," << std::endl
+              << "  * Artur Gottmann," << std::endl
+              << "  * Guillermo Hamity, " << std::endl
+              << "  * Sven Heinemeyer, " << std::endl
+              << "  * Panu Keskinen," << std::endl
+              << "  * Stefan Liebler," << std::endl
+              << "  * Allison McCarn," << std::endl
+              << "  * Trevor Vickey," << std::endl
+              << "  * Roger Wolf." << std::endl
+              << "_____________________________________________________________" << std::endl;
   }
   if(!filename){
-    std::cout << "Chose input file using the method mssm_xs_tools::setup()" << std::endl;
+    std::cout << "Don't forget to choose an input file using the method mssm_xs_tools::setup()" << std::endl;
   }
   else{
     input_ = new TFile(filename);

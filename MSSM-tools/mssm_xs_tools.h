@@ -14,7 +14,7 @@
  *
  * This is a class to provide a facilitated interface to mass relations, decay widths, branching
  * fractions and production cross sections for all Higgs bosons of various benchmark
- * models of the MSSM. This information is usually provided in form of 2d (TH2F) histograms in root
+ * models of the MSSM. This information is usually provided in form of 2D (TH2F) histograms in root
  * input files linked to the LHCXSWG-3 TWiki page (*). It is usually parametrized as a function of
  * the pseudoscalar neutral Higgs boson mass, mA, and the ratio between the vacuum expectation
  * values, tanb=v2/v1, of the two Higgs doublets in the MSSM, in the case of mass relations,
@@ -24,14 +24,14 @@
  *
  * The access functions provided in this class are supposed to facilitate the process of finding
  * the proper histogram (following LHCXSWG internal naming conventions) and the proper bin in the
- * 2d histogram corresponding to mphi=(mA,mH+) and tanb, of which the latter is a root technicali-
+ * 2D histogram corresponding to mphi=(mA,mH+) and tanb, of which the latter is a root technicali-
  * ty (cf. mssm_xs_tools::read for more details).
  * ------------------------------------------------------------------------------------------------
  * The quantity mphi below denotes either mA or mHp dependent on the scenario under consideration.
  * By default it yields mphi=mA. Only for the heavy Higgs scenario and the CPV scenario mphi=mH+.
  * ------------------------------------------------------------------------------------------------
  *
- * The names of the 2d histograms are build from building blocks separated by "_", to identify the
+ * The names of the 2D histograms are build from building blocks separated by "_", to identify the
  * contained information. The following building blocks exist:
  *
  * [MASS]   : indicating mass ("m");
@@ -53,7 +53,7 @@
  * intuitive naming scheme to the actual histogram names. For the sake of simplicity this naming
  * scheme partially makes use of the naming conventions as used for the individual building blocks
  * of the histogram names. For more information check the documentation for each individual trans-
- * lation rule in the class implementation. In the naming scheme used throughtout this class the
+ * lation rule in the class implementation. In the naming scheme used throughout this class the
  * following rules apply:
  *
  * Production: separate building block for [PROD] from building block for [BOSON] by "->" (e.g.
@@ -63,15 +63,15 @@
  *             "gg->A::scaleup").
  * Decay     : separate building block for [BOSON] from building block for [DECAY] by "->" (e.g.
  *             "A->tautau"). This will provide you with the branching fraction for the correspon-
- *             ding decay.
+ *             ding decay.https://twiki.cern.ch/twiki/pub/LHCPhysics/LHCHWG/Higgs_XSBR_YR4_update.xlsx
  * Mass/Width: just give the building block for the [BOSON] type as function argument (e.g. "A",
  *             "H", "h", "Hp").
  *
- * In case that called histograms so not exist in the root input file a WARNING is issued and a
- * NULL pointer for TH2F is returned. Make sure you catch these WARNINGS in further use of this
- * class. To hide away also this simple logic from the user a full set of fully documented pre-de-
- * fined access functions for all available information is also provided. These function can also
- * be used as reference for further examples of the access logic described above (e.g. concerning
+ * In the case that called histograms do not exist in the root input file a WARNING is issued and
+ * a NULL pointer for TH2F is returned. Make sure you catch these NULL pointers in further use of
+ * this class. To hide away also this simple logic from the user a full set of fully documented 
+ * pre-defined access functions for all available information is also provided. These function can 
+ * also be used as reference for further examples of the access logic described above (e.g. concerning
  * further conventions used for numerous building blocks of type [DECAY]).
  *
  * PHYSICS CONTENT:
@@ -646,6 +646,8 @@ class mssm_xs_tools{
   /// minimal and maximal element on y-axis (tanb) of TH2F (filled in function hist;
   /// used in function mH2mA)
   double minY_, maxY_;
+  /// version string
+  static const char* VERSION;
 };
 
 inline double
