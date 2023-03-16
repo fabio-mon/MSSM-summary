@@ -96,7 +96,7 @@ TCanvas* squared_legend_to_right(float lower_x=130., float upper_x=2100, float l
   tex->SetTextFont(42);
   tex->SetLineWidth(2);
   tex->SetTextSize(0.035);
-  tex->DrawLatex(0.42,0.95,"35.9-138^{#club} fb^{-1} (13 TeV)");
+  tex->DrawLatex(0.42,0.95,"35.9-138 fb^{-1} (13 TeV)");
 
   return canv;
 }
