@@ -10,7 +10,7 @@
 #include "TCanvas.h" 
 
 void mssm_mH2mA(const char* boson="H", double tanb=5){
-  mssm_xs_tools mssm("hMSSM_13TeV.root",true,0);
+  mssm_xs_tools mssm("root_files/hMSSM_13.root",true,0);
  
   TCanvas* canv = new TCanvas("cmp", "Comparison 8TeV(v0.5) vs 13TeV(v1.0)", 600, 600);
   canv->SetGridx(1); canv->SetLogx(0);
