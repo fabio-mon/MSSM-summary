@@ -10,10 +10,11 @@ TGraph* HIG_21_011_obs(bool filled){
   graph->SetPoint( 3, 316.76, 4.81);
   graph->SetPoint( 4, 346.35, 3.84);
   graph->SetPoint( 5, 440.38, 1.81);
+  graph->SetPoint( 6, 450.00, 1.00);
   if(filled){
-    graph->SetPoint(6, 440.38, 0.50);
-    graph->SetPoint(7, 256.75, 0.50);
-    graph->SetPoint(8, 256.75, 4.83);
+    graph->SetPoint(7, 450.00, 0.50);
+    graph->SetPoint(8, 256.75, 0.50);
+    graph->SetPoint(9, 256.75, 4.83);
   }
   return graph;
 }
@@ -24,6 +25,7 @@ TGraph* HIG_21_011_exp(){
   graph->SetPoint( 1, 276.94, 4.72);
   graph->SetPoint( 2, 296.61, 4.31);
   graph->SetPoint( 3, 316.12, 4.16);
-  graph->SetPoint( 4, 346.97, 4.19);
+  graph->SetPoint( 4, 346.97, 3.75); //4.19
+  graph->SetPoint( 5, 400.00, 1.00);
   return graph;
 }
