@@ -3,6 +3,13 @@
 #include "TGraph.h"
 
 TGraph* HIG_XX_YYY_obs(bool filled){
+  // Function to return the observed cotour. Call with filled=true/false. 
+  //
+  // true  : use for a TGraph that should be plotted as filled
+  // false : use for a TGraph that should be plotted as NOT filled 
+  // 
+  // Add the x-value in the column of second arguments; add the y-valuess in 
+  // the column of third arguments to TGraph::SetPoint(*, *, *).
   TGraph* graph = new TGraph();
   graph->SetPoint( 0,,);
   graph->SetPoint( 1,,);
@@ -24,14 +31,18 @@ TGraph* HIG_XX_YYY_obs(bool filled){
   graph->SetPoint(17,,);
   graph->SetPoint(18,,);
   if(filled){
-    graph->SetPoint(16,,);
-    graph->SetPoint(17,,);
-    graph->SetPoint(18,,);
+    // In case of filled=true add three points here to make sure the filled 
+    // contour is closed and convex. 
+    graph->SetPoint(19,,);
+    graph->SetPoint(20,,);
+    graph->SetPoint(21,,);
   }
   return graph;
 }
 
 TGraph* HIG_XX_YYY_exp(){
+  // Function to return the expected cotour. These contours are not supposed to  
+  // be filled. 
   TGraph* graph = new TGraph();
   graph->SetPoint( 0,,);
   graph->SetPoint( 1,,);
