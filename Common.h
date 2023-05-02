@@ -24,12 +24,13 @@ TColor* kComb    = new TColor(3010, .28, .58, .70, "kComb");
 TColor* tComb    = new TColor(3011, .28, .58, .70, "tComb"    , 0.25);
  
 // Common plotting style for expected and observed limit contours 
-// exp         : TGraph for expected limits
-// obs         : TGraph for observed limits
-// dcolor      : fill (=hatch) color for expected limits
-// lcolor      : line color for observed limits
-// tcolor      : (transparent) fill color for observed limits
-// upper_limit : indicate whether these are upper/lower limits (for hatching).  
+//  exp         : TGraph for expected limits
+//  obs         : TGraph for observed limits
+//  dcolor      : fill (=hatch) color for expected limits
+//  lcolor      : line color for observed limits
+//  tcolor      : (transparent) fill color for observed limits
+//  upper_limit : indicate whether these are upper/lower limits (for hatching)  
+// TGraph* of the observed limit contour is returned.
 TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tcolor, bool upper_limit=true){
   TGraph* g0 = exp();
   g0->SetLineColor(dcolor);
