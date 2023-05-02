@@ -24,10 +24,16 @@ TColor* kComb    = new TColor(3010, .28, .58, .70, "kComb");
 TColor* tComb    = new TColor(3011, .28, .58, .70, "tComb"    , 0.25);
  
 // Common plotting style for expected and observed limit contours 
-TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tcolor){
+// exp         : TGraph for expected limits
+// obs         : TGraph for observed limits
+// dcolor      : fill (=hatch) color for expected limits
+// lcolor      : line color for observed limits
+// tcolor      : (transparent) fill color for observed limits
+// upper_limit : indicate whether these are upper/lower limits (for hatching).  
+TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tcolor, bool upper_limit=true){
   TGraph* g0 = exp();
   g0->SetLineColor(dcolor);
-  g0->SetLineWidth(-303);
+  g0->SetLineWidth((upper_limit?+1:-1)*303);
   g0->SetFillStyle(3004);
   g0->SetFillColor(dcolor);
   g0->SetLineStyle(1);
@@ -50,7 +56,7 @@ TGraph* Contour(TGraph* exp(), TGraph* obs(bool), int dcolor, int lcolor, int tc
 }
 
 // Canvas for a squared central figure with legend to the right including "CMS and lumi" tag
-TCanvas* squared_legend_to_right(float lower_x=130., float upper_x=2100, float lower_y=1., float upper_y=60., int log_x=1, int log_y=1){
+TCanvas* squared_legend_to_right(float lower_x=130., float upper_x=2100., float lower_y=1., float upper_y=60., int log_x=1, int log_y=1){
   TCanvas* canv = new TCanvas("MSSM", "MSSM Limits", 900, 640);
   canv->SetGridx(0); canv->SetLogx(log_x);
   canv->SetGridy(0); canv->SetLogy(log_y);

@@ -19,7 +19,7 @@ void MSSM_limits_hMSSM(){
   // switch off stats box
   gStyle->SetOptStat(0);
   // define canvas  
-  TCanvas* canv = squared_legend_to_right();
+  TCanvas* canv = squared_legend_to_right(130., 2000.);
   // define legend
   TLegend* leg0_ = new TLegend(0.67, 0.10, 0.97, 0.94);
   leg0_->SetBorderSize(1);
@@ -40,25 +40,25 @@ void MSSM_limits_hMSSM(){
  Plotting (contours will be drawn on top of each other according to this order)
 
 -----------------------------------------------------------------------------*/
-  TGraph* g1 = Contour(HIG_17_031_exp, HIG_17_031_obs, kCombDark->GetNumber(), kComb->GetNumber(), tComb->GetNumber()); 
+  TGraph* g1 = Contour(HIG_17_031_exp, HIG_17_031_obs, kCombDark->GetNumber(), kComb->GetNumber(), tComb->GetNumber(),false); 
   leg0_->AddEntry(g1 , "#splitline{h(125)}{EPJC 79 (2019) 421}", "F");
   //TGraph* g2 = Contour(HIG_18_010_exp, HIG_18_010_obs, kYellow+2, kYellow, tYellow->GetNumber()); 
   //leg0_->AddEntry(g2, "#splitline{A/H/h #rightarrow #mu#mu}{PLB 798 (2019) 134922}", "F");
   //TGraph* g3 = Contour(HIG_16_018_exp, HIG_16_018_obs, kCyan+2, kCyan, tCyan->GetNumber()); 
   //leg0_->AddEntry(g3, "#splitline{A/H #rightarrow bb}{JHEP 08 (2018) 113}", "F");
-  TGraph* g4 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber()); 
+  TGraph* g4 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber(), true); 
   leg0_->AddEntry(g4, "#splitline{A/H/h #rightarrow #tau#tau}{arxiv:2208.02717^{#scale[1.6]{ #club}}}", "F");
-  TGraph* g5 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber()); 
-  leg0_->AddEntry(g5, "#splitline{H#rightarrow WW(2l2#nu)}{(HIG-20-016)^{#scale[1.6]{ #club}}}", "F");
+  TGraph* g5 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber(), false); 
+  leg0_->AddEntry(g5, "#splitline{H #rightarrow WW(2l2#nu)}{(HIG-20-016)^{#scale[1.6]{ #club}}}", "F");
   //TGraph* g5 = Contour(HIG_17_033_exp, HIG_17_033_obs, kMagenta+2, kMagenta, tMagenta->GetNumber()); 
   //leg0_->AddEntry(g5, "#splitline{H #rightarrow WW(l#nu l#nu and l#nu qq)}{JHEP 03 (2020) 34}", "F");
-  TGraph* g6 = Contour(HIG_21_011_exp, HIG_21_011_obs, kRed+2, kRed, tRed->GetNumber()); 
+  TGraph* g6 = Contour(HIG_21_011_exp, HIG_21_011_obs, kRed+2, kRed, tRed->GetNumber(), false); 
   leg0_->AddEntry(g6 , "#splitline{H #rightarrow hh (bb#gamma#gamma)}{HIG-21-011^{#scale[1.6]{ #club}}}", "F");
   //TGraph* g6 = Contour(HIG_17_002_exp, HIG_17_002_obs, kRed+2, kRed, tRed->GetNumber()); 
   //leg0_->AddEntry(g6 , "#splitline{H #rightarrow hh (bb#tau#tau)}{PLB 778 (2018) 101}", "F");
-  TGraph* g7 = Contour(HIG_17_027_exp, HIG_17_027_obs, kOrange+2, kOrange, tOrange->GetNumber()); 
-  leg0_->AddEntry(g7, "#splitline{H #rightarrow tt}{JHEP 04 (2020) 171}", "F");
-  TGraph* g8 = Contour(HIG_18_023_exp, HIG_18_023_obs, kGreen+2, kGreen, tGreen->GetNumber()); 
+  TGraph* g7 = Contour(HIG_17_027_exp, HIG_17_027_obs, kOrange+2, kOrange, tOrange->GetNumber(), false); 
+  leg0_->AddEntry(g7, "#splitline{H/A #rightarrow tt}{JHEP 04 (2020) 171}", "F");
+  TGraph* g8 = Contour(HIG_18_023_exp, HIG_18_023_obs, kGreen+2, kGreen, tGreen->GetNumber(), false); 
   leg0_->AddEntry(g8, "#splitline{A #rightarrow Zh (ll#tau#tau)}{JHEP 03 (2020) 65}", "F");
 
 /*-----------------------------------------------------------------------------
