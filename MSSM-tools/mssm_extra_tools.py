@@ -8,16 +8,18 @@ def mA_tanb_scan(obs, mX, mX2mA, model, start=0.5, stop=60., step_size=0.5):
     """
     Scan tanb and find intercept of the prediction with the observed limit.
 
-    The function uses the idea that at the point of the intercept the sign of 
-    pred-obs changes. When this happens the given tanb value is estimated from
-    the tanb points above and below through linear interpolation.
+    The function uses the idea that at the point of the intercept the 
+    difference "pred-obs" changes sign. When this happens the given tanb value 
+    is estimated from the tanb points above and below through linear 
+    interpolation.
     
-    The scan can be run for fixed value of mX, in the direction from small to 
+    The scan can be run for fixed values of mX, in the direction from small to 
     large values for tanb, or in the direction from large to small values of 
     tanb. In the latter case note that step_size has to have a negative value.
     
-    Currently the scan stops at the first crossing point. It is not supported 
-    to identify islands in the mA-tanb plane.
+    Currently the scan stops at the first crossing point. Identifying islands 
+    in the mA-tanb plane, where the scan would cross at least twice is not 
+    supported.
 
     Arguments are:
               
@@ -47,7 +49,7 @@ def mA_tanb_scan(obs, mX, mX2mA, model, start=0.5, stop=60., step_size=0.5):
     return (mA, stop)
 
 if __name__=="__main__":
-    # Call mA_tanb_scan with some reasonable value; example taken from 
+    # Call mA_tanb_scan with some reasonable values; example taken from 
     # HIG-21-011
     import mssm_xs_tools 
     mssm = mssm_xs_tools.mssm_xs_tools(b"root_files/hMSSM_13.root", True, 0)
