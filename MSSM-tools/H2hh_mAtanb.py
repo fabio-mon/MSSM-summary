@@ -27,7 +27,7 @@ def recast_limits(source, target, mass_column, limit_column):
     with open(source) as f:
         r=csv.DictReader(f, delimiter=",")
         for l in r:
-            contour.append(mA_tanb_scan(float(l[limit_column])/br_hgamgam/br_hbb*fb2pb, float(l[mass_column]), 
+            contour.append(mA_tanb_scan(float(l[limit_column])*fb2pb, float(l[mass_column]), 
             mH2mA, ggHhh, start, stop, step))
     # Write
     with open(target, mode="w") as f:
@@ -38,6 +38,8 @@ def recast_limits(source, target, mass_column, limit_column):
                 w.writerow(l)
 
 if __name__=="__main__":
-    recast_limits("./csv_files/HIG-21-011_obs.csv", "./csv_files/HIG-21-011_mAtanb_obs.csv", "mX", "limit")
-    recast_limits("./csv_files/HIG-21-011_exp.csv", "./csv_files/HIG-21-011_mAtanb_exp.csv", "mX", "limit")
+    import sys
+    if len(sys.argv)!=3:
+        raise RuntimeError("USAGE: python H2hh_mAtanb.py <input.csv> <output.csv> ")
 
+    recast_limits(sys.argv[1], sys.argv[2], "mX", "limit")
