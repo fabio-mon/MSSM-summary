@@ -36,3 +36,33 @@ For the use with python the most relevant access functions of the class `mssm_xs
 > .L mssm_xs_tools.C++
 
 Check the documentation of the python module mssm_xs_tools.py for more information. 
+
+# mssm_extra_tools
+
+The module ```mssm_extra_tools``` contains the function ```mA_tanb_scan``` to obtain exclusion contours in the $m_{\mathrm{A}}$-$\tan\beta$ plane from model-independent cross section times branching fraction ($\sigma\cdot\mathcal{B}$) limits that have been determined on other masses like $m_{\mathrm{H}}$ or $m_{H^{+}}$, in short referred to by $m_{\mathrm{X}}$ in the following. In this case $m_{\mathrm{X}}$ needs to be floated to $m_{\mathrm{A}}$ and the cross section and branching fraction of the model in question need to be checked against the observed and/or expected $\sigma\cdot\mathcal{B}$-limits.  
+
+The function takes the following arguments: 
+
+- $\sigma\cdot\mathcal{B}$;
+- $m_{\mathrm{X}}$; 
+- the function to translate $m_{\mathrm{X}}$ to $m_{\mathrm{A}}$;
+- the model to obtain a $\sigma\cdot\mathcal{B}$ prediction from;
+- the start and stop values, and the step size for the scan in $\tan\beta$.
+
+Note that the function does not support the search for islands in the $m_{\mathrm{A}}$-$\tan\beta$ plane, but only upper or lower limits on $\tan\beta$ (with a single crossing, where the predictions changes from "smaller" to "larger" than the observed/expected limit). 
+
+The default implementation is to scan $\tan\beta$ from low to large values. the function cal also be used to scan from large to low values by giving a negative step size and start>stop. The function returns a tuple of $(m_{\mathrm{A}}, \tan\beta)$, if no crossing is found $(m_{\mathrm{A}}, \text{stop})$, is returned.
+
+The usage is demonstrated when running the module as ```__main__```. The minimal ingredients to prepare a function call are:
+
+- import mssm_xs_tools
+- defined the model
+- define the mapping from $m_{\mathrm{X}}$ to $m_{\mathrm{A}}$.
+
+Two full scale examples are implemented, which define a function ```recast_limits``` each that wraps the function call with a read from and write to csv. These examples are:
+
+- ```H2hh_mAtanb.py```
+- ```H2WW_mAtanb.py```
+
+Example csv files containing $\sigma\cdot\mathcal{B}$-limits in csv format are also prodived. The models in question can be obtained e.g. from [here](https://zenodo.org/record/6793918#.ZFlUehnP3JE). 
+
