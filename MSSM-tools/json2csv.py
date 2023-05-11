@@ -5,7 +5,7 @@ import sys
 
 if __name__=="__main__":
     if len(sys.argv)!=4:
-        raise RuntimeError("USAGE: python json2csv.py <input.json> <output.csv> <exp/obs")
+        raise RuntimeError("USAGE: python json2csv.py <input.json> <output.csv> <exp/obs>")
 
     indata={}
     with open(sys.argv[1], 'r') as infile:
