@@ -26,9 +26,9 @@ graph->SetPoint(1, 397.02568292532527,3.85627878981041);
 graph->SetPoint(2, 483.1847537363587,1.0919467102567268);
 return graph;
 }
-5. Add the library created at the previous step to the plotting script. Below is the example for the Mh125 scenario. The same procedure should be done for the hMSSM scenario.
-Open the file MSSM-summary/Run-2-Mh125/MSSM_limits_mh125.C and add             
-`#include "bbgg_138fb.h"` to the header and the following two lines where all the graphs are defined
+```
+5. Add the library created at the previous step to the plotting script. Below is the example for the Mh125 scenario. The same procedure should be done for the hMSSM scenario.       
+Open the file MSSM-summary/Run-2-Mh125/MSSM_limits_mh125.C and add `#include "bbgg_138fb.h"` to the header and the following two lines where all the graphs are defined
 ```
 TGraph* g_bbgg_138fb = Contour(bbgg_138, NULL, kMagenta+2, kMagenta, tMagenta->GetNumber(), false); 
 leg0_->AddEntry(g_bbgg_138fb , "#splitline{H #rightarrow hh (bb#gamma#gamma)}{138 fb^{-1}, 14 TeV}", "F");
