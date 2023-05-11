@@ -4,6 +4,7 @@
 #include "HIG-20-016.h"
 #include "HIG-21-011.h"
 #include "HIG-21-001.h"
+#include "my_HIG-21-011.h"
 #include "Eligibility.h"
 
 void MSSM_limits_mh125(){
@@ -46,16 +47,24 @@ void MSSM_limits_mh125(){
   e1->SetFillStyle(3002);//3005
   e1->Draw("FLsame");
 
-  TGraph* g1 = Contour(HIG_18_010_exp, HIG_18_010_obs, kYellow+2, kYellow, tYellow->GetNumber(), true); 
-  leg0_->AddEntry(g1, "#splitline{A/H/h #rightarrow #mu#mu}{PLB 798 (2019) 134922}", "F");
-  TGraph* g2 = Contour(HIG_16_018_exp, HIG_16_018_obs, kCyan+2, kCyan, tCyan->GetNumber(), true); 
-  leg0_->AddEntry(g2, "#splitline{A/H #rightarrow bb}{JHEP 08 (2018) 113}", "F");
-  TGraph* g3 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber(), true); 
-  leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717^{#scale[1.6]{ #club}}}", "F");
-  TGraph* g4 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber(), false); 
-  leg0_->AddEntry(g4, "#splitline{H #rightarrow WW(2l2#nu)}{(HIG-20-016)^{#scale[1.6]{ #club}}}", "F");
-  TGraph* g5 = Contour(HIG_21_011_exp, HIG_21_011_obs, kRed+2, kRed, tRed->GetNumber(), false); 
-  leg0_->AddEntry(g5 , "#splitline{H #rightarrow hh (bb#gamma#gamma)}{HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  //TGraph* g1 = Contour(HIG_18_010_exp, HIG_18_010_obs, kYellow+2, kYellow, tYellow->GetNumber(), true); 
+  //leg0_->AddEntry(g1, "#splitline{A/H/h #rightarrow #mu#mu}{PLB 798 (2019) 134922}", "F");
+  //TGraph* g2 = Contour(HIG_16_018_exp, HIG_16_018_obs, kCyan+2, kCyan, tCyan->GetNumber(), true); 
+  //leg0_->AddEntry(g2, "#splitline{A/H #rightarrow bb}{JHEP 08 (2018) 113}", "F");
+  //TGraph* g3 = Contour(HIG_21_001_exp, HIG_21_001_obs, kBlue+2, kBlue, tBlue->GetNumber(), true); 
+  //leg0_->AddEntry(g3, "#splitline{A/H/h #rightarrow #tau#tau}{axriv:2208.02717^{#scale[1.6]{ #club}}}", "F");
+  //TGraph* g4 = Contour(HIG_20_016_exp, HIG_20_016_obs, kMagenta+2, kMagenta, tMagenta->GetNumber(), false); 
+  //leg0_->AddEntry(g4, "#splitline{H #rightarrow WW(2l2#nu)}{(HIG-20-016)^{#scale[1.6]{ #club}}}", "F");
+  //TGraph* g5 = Contour(HIG_21_011_exp, HIG_21_011_obs, kRed+2, kRed, tRed->GetNumber(), false); 
+  //leg0_->AddEntry(g5 , "#splitline{H #rightarrow hh (bb#gamma#gamma)}{HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  TGraph* my_g6 = Contour(bbgg_138fb_exp, NULL, kYellow+2, kYellow, tYellow->GetNumber(), false); 
+  leg0_->AddEntry(my_g6 , "#splitline{H #rightarrow hh (bb#gamma#gamma) 138 fb}{my HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  TGraph* my_g7 = Contour(bbgg_300fb_exp, NULL, kCyan+2, kCyan, tCyan->GetNumber(), false); 
+  leg0_->AddEntry(my_g7 , "#splitline{H #rightarrow hh (bb#gamma#gamma) 300 fb}{my HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  TGraph* my_g8 = Contour(bbgg_1000fb_exp, NULL, kBlue+2, kBlue, tBlue->GetNumber(), false); 
+  leg0_->AddEntry(my_g8 , "#splitline{H #rightarrow hh (bb#gamma#gamma) 1000 fb}{my HIG-21-011^{#scale[1.6]{ #club}}}", "F");
+  TGraph* my_g9 = Contour(bbgg_3000fb_exp, NULL, kMagenta+2, kMagenta, tMagenta->GetNumber(), false); 
+  leg0_->AddEntry(my_g9 , "#splitline{H #rightarrow hh (bb#gamma#gamma) 3000 fb}{my HIG-21-011^{#scale[1.6]{ #club}}}", "F");
   
   TGraph* dummy = new TGraph();  
   dummy->SetFillColor(kWhite);
