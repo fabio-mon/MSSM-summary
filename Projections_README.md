@@ -10,7 +10,7 @@ python3 json2csv.py json_files/bbgg_138fb_exp.json csv_files/bbgg_138fb_exp.csv 
 python3 H2hh_mAtanb.py csv_files/bbgg_138fb_exp.csv csv_files/bbgg_138fb_mAtanb_Mh125_exp.csv mh125 14
 python3 H2hh_mAtanb.py csv_files/bbgg_138fb_exp.csv csv_files/bbgg_138fb_mAtanb_hMSSM_exp.csv hMSSM 14
 ```
-NOTE: for now we should use the theory predictions for the hMSSM scenario at 13 TeV because the ones at 14 TeV have a bug
+NOTE: for now we should use the theory predictions for the hMSSM scenario at 13 TeV because the ones at 14 TeV have a bug      
 4. Convert the (mA, tan(b)) exclusion in a c++ library.
 ```
 python3 csv2graph.py csv_files/bbgg_138fb_mAtanb_Mh125_exp.csv | sed s#a_name#bbgg_138#g > ../Run-2-Mh125/bbgg_138fb.h
